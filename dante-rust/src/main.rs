@@ -20,8 +20,8 @@ fn main() {
     // println!("计算结果: {}", statement_expression());
     // ownership();
     // complex_type();
-    flow_control();
-
+    // flow_control();
+    method_test();
     // dead_end();
 }
 
@@ -227,7 +227,7 @@ fn _dead_end() -> ! {
  * 流程控制
  *
  */
-fn flow_control() {
+fn _flow_control() {
     println!("========================= 表达式 ================================");
     let condition = true;
     let number = if condition { 5 } else { 6 };
@@ -260,7 +260,7 @@ fn flow_control() {
             println!("跳出loop循环。");
             break;
         }
-        
+
         println!("当前计数: {}", connter);
     }
 
@@ -284,4 +284,38 @@ fn flow_control() {
         "NORTH" => println!("北方"),
         _ => println!("未知方向"),
     };
+
+    let v = vec!['a', 'b', 'c'];
+
+    for (index, value) in v.iter().enumerate() {
+        println!("{} is at index {}", value, index);
+    }
+
+    // 解构 Option，一个变量要么有值：Some(T), 要么为空：None
+    let x = Some(5);
+    let y = 10;
+
+    match x {
+        Some(50) => println!("Got 50"),
+        Some(y) => println!("Matched, y = {:?}", y),
+        _ => println!("Default case, x = {:?}", x),
+    }
+
+    println!("at the end: x = {:?}, y = {:?}", x, y);
+}
+
+/**
+ * 方法
+ */
+impl User {
+    fn eat(&self) -> String {
+        let mut buf = self.username.to_string();
+        buf.push_str("在吃饭！");
+        buf.to_string()
+    }
+}
+
+fn method_test() {
+    let user = User {active: true, username: String::from("但丁") , email: String::from("dante@gmail.com"), sign_in_count: 100};
+    println!("===> {}", user.eat());
 }
